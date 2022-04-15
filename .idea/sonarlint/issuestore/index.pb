@@ -9,14 +9,10 @@ A
 gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
 <
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
-|
-Lapp/src/main/java/andres/rangel/newsapp/ui/fragments/BreakingNewsFragment.kt,d/e/defaed4ce84e48ff7067e38848c383edd9027814
 y
 Iapp/src/androidTest/java/andres/rangel/newsapp/ExampleInstrumentedTest.kt,c/d/cd4d45191b5a9d79396e9a377d8bd5e1394ce311
 F
 app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
-z
-Japp/src/main/java/andres/rangel/newsapp/ui/fragments/SearchNewsFragment.kt,b/5/b50317d9974adcbd2a852752b167ad1c401df77f
 X
 (app/src/main/res/values-night/themes.xml,8/c/8c3a6b96d9ffba496992e612d58227c19e6b9e65
 R
@@ -27,8 +23,6 @@ R
 "app/src/main/res/values/colors.xml,9/6/969faa2a5d9f5e8390e958d2c07f2cfd54676e6b
 P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
-y
-Iapp/src/main/java/andres/rangel/newsapp/ui/fragments/SavedNewsFragment.kt,3/b/3b1fb18a7896638280798ecd4dc071854fe7e8ce
 h
 8app/src/main/res/drawable-v24/ic_launcher_foreground.xml,0/7/078508c831007ccb3938b355f0d30a8368f99a8d
 h
@@ -49,5 +43,3 @@ _
 /app/src/main/res/layout/fragment_saved_news.xml,b/5/b572d6b651c5c8e107abd085fd9eb71b70f98b83
 \
 ,app/src/main/res/layout/fragment_article.xml,2/a/2a26fb79cfecd2c2f847f26054cac9de4feb2b34
-w
-Gapp/src/main/java/andres/rangel/newsapp/ui/fragments/ArticleFragment.kt,f/7/f76996a59eeec5cfc63356876784c4ae5c4e4ce1
