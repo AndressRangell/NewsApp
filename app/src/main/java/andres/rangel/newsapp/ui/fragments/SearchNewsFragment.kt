@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 
 class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
 
-    lateinit var viewModel: NewsViewModel
+    private lateinit var viewModel: NewsViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
