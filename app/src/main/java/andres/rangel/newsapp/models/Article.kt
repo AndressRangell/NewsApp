@@ -1,4 +1,4 @@
-package andres.rangel.newsapp.ui
+package andres.rangel.newsapp.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

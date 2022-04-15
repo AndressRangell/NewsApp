@@ -1,6 +1,6 @@
 package andres.rangel.newsapp.api
 
-import andres.rangel.newsapp.ui.NewsResponse
+import andres.rangel.newsapp.models.NewsResponse
 import andres.rangel.newsapp.utils.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET

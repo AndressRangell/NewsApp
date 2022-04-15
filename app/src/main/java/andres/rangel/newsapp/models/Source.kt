@@ -1,4 +1,4 @@
-package andres.rangel.newsapp.ui
+package andres.rangel.newsapp.models
 
 data class Source(
     val id: Any,

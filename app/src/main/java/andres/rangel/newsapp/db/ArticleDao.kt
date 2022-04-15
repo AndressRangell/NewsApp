@@ -1,6 +1,6 @@
 package andres.rangel.newsapp.db
 
-import andres.rangel.newsapp.ui.Article
+import andres.rangel.newsapp.models.Article
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
