@@ -1,6 +1,11 @@
 package andres.rangel.newsapp.ui
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "article")
 data class Article(
+    @PrimaryKey(autoGenerate = true)
     val author: String,
     val content: String,
     val description: String,
