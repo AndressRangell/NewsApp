@@ -1,5 +1,6 @@
 package andres.rangel.newsapp.ui
 
+import andres.rangel.newsapp.models.Article
 import andres.rangel.newsapp.models.NewsResponse
 import andres.rangel.newsapp.repository.NewsRepository
 import andres.rangel.newsapp.utils.Resource
@@ -51,5 +52,16 @@ class NewsViewModel(
         }
         return Resource.Error(response.message())
     }
+
+    fun saveArticle(article: Article) = viewModelScope.launch {
+        newsRepository.insertOrUpdate(article)
+    }
+
+    fun deleteArticle(article: Article) = viewModelScope.launch {
+        newsRepository.deleteArticle(article)
+    }
+
+    fun getSavedNews() =
+        newsRepository.getSavedNews()
 
 }

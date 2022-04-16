@@ -11,9 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 
-class SavedNewsFragment: Fragment(R.layout.fragment_saved_news) {
+class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
 
     private lateinit var binding: FragmentSavedNewsBinding
     private lateinit var viewModel: NewsViewModel
@@ -41,6 +44,37 @@ class SavedNewsFragment: Fragment(R.layout.fragment_saved_news) {
                 R.id.action_savedNewsFragment_to_articleFragment,
                 bundle
             )
+        }
+
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ) = true
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val article = newsAdapter.differ.currentList[position]
+                viewModel.deleteArticle(article)
+                Snackbar.make(view, "Successfully deleted article", Snackbar.LENGTH_LONG).apply {
+                    setAction("Undo") {
+                        viewModel.saveArticle(article)
+                    }
+                    show()
+                }
+            }
+        }
+
+        ItemTouchHelper(itemTouchHelperCallback).apply {
+            attachToRecyclerView(binding.rvSavedNews)
+        }
+
+        viewModel.getSavedNews().observe(viewLifecycleOwner) { articles ->
+            newsAdapter.differ.submitList(articles)
         }
     }
 
