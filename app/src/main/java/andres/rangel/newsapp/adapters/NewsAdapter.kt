@@ -3,6 +3,7 @@ package andres.rangel.newsapp.adapters
 import andres.rangel.newsapp.R
 import andres.rangel.newsapp.databinding.ItemArticlePreviewBinding
 import andres.rangel.newsapp.models.Article
+import andres.rangel.newsapp.utils.Constants.Companion.IMAGE_NO_AVAILABLE
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,9 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         val article = differ.currentList[position]
         holder.itemView.apply {
             Glide.with(this).load(article.urlToImage).into(binding.ivArticleImage)
+
+            if(article.urlToImage == null)
+                Glide.with(this).load(IMAGE_NO_AVAILABLE).into(binding.ivArticleImage)
 
             binding.apply {
                 tvSource.text = article.source.name

@@ -7,13 +7,16 @@ import andres.rangel.newsapp.ui.NewsActivity
 import andres.rangel.newsapp.ui.NewsViewModel
 import andres.rangel.newsapp.utils.Constants.Companion.SEARCH_NEWS_TIME_DELAY
 import andres.rangel.newsapp.utils.Resource
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -40,6 +43,16 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
 
         viewModel = (activity as NewsActivity).viewModel
         initRecyclerView()
+
+        newsAdapter.setOnItemClickListener { article ->
+            val bundle = Bundle().apply {
+                putSerializable("article", article)
+            }
+            findNavController().navigate(
+                R.id.action_searchNewsFragment_to_articleFragment,
+                bundle
+            )
+        }
 
         var job: Job? = null
         binding.etSearch.addTextChangedListener { editable ->

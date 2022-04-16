@@ -19,12 +19,12 @@ class NewsViewModel(
     private var newsByWordPage = 1
 
     init {
-        getBreakingNews("us")
+        getBreakingNews()
     }
 
-    private fun getBreakingNews(countryCode: String) = viewModelScope.launch {
+    private fun getBreakingNews() = viewModelScope.launch {
         breakingNews.postValue(Resource.Loading())
-        val response = newsRepository.getBreakingNews(countryCode, breakingNewsPage)
+        val response = newsRepository.getBreakingNews(breakingNewsPage)
         breakingNews.postValue(handleBreakingNewsResponse(response))
     }
 
