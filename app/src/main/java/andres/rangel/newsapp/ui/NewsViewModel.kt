@@ -15,15 +15,18 @@ class NewsViewModel(
 ) : ViewModel() {
 
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    private var breakingNewsPage = 1
+    var breakingNewsPage = 1
+    var breakingNewsResponse: NewsResponse? = null
+
     val newsByWord: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    private var newsByWordPage = 1
+    var newsByWordPage = 1
+    var newsByWordResponse: NewsResponse? = null
 
     init {
         getBreakingNews()
     }
 
-    private fun getBreakingNews() = viewModelScope.launch {
+    fun getBreakingNews() = viewModelScope.launch {
         breakingNews.postValue(Resource.Loading())
         val response = newsRepository.getBreakingNews(breakingNewsPage)
         breakingNews.postValue(handleBreakingNewsResponse(response))
@@ -37,8 +40,16 @@ class NewsViewModel(
 
     private fun handleBreakingNewsResponse(response: Response<NewsResponse>): Resource<NewsResponse> {
         if(response.isSuccessful){
-            response.body()?.let {
-                return Resource.Success(it)
+            response.body()?.let { resultResponse ->
+                breakingNewsPage++
+                if(breakingNewsResponse == null){
+                    breakingNewsResponse = resultResponse
+                }else {
+                    val oldArticle = breakingNewsResponse?.articles
+                    val newArticle = resultResponse.articles
+                    oldArticle?.addAll(newArticle)
+                }
+                return Resource.Success(breakingNewsResponse ?: resultResponse)
             }
         }
         return Resource.Error(response.message())
@@ -46,8 +57,16 @@ class NewsViewModel(
 
     private fun handleNewsByWordResponse(response: Response<NewsResponse>): Resource<NewsResponse> {
         if(response.isSuccessful){
-            response.body()?.let {
-                return Resource.Success(it)
+            response.body()?.let { resultResponse ->
+                newsByWordPage++
+                if(newsByWordResponse == null){
+                    newsByWordResponse = resultResponse
+                }else {
+                    val oldArticle = newsByWordResponse?.articles
+                    val newArticle = resultResponse.articles
+                    oldArticle?.addAll(newArticle)
+                }
+                return Resource.Success(newsByWordResponse ?: resultResponse)
             }
         }
         return Resource.Error(response.message())
